@@ -1,0 +1,152 @@
+| tram1 doc11 docRepe doc12 plani1 plani2 doc21 doc22 transfer1 doc31 doc32 doc34 doc35 transfer2 doc36 doc37 doc38 transferNoValid doc39 inbox bandejaCarga bandejaGestion archivo value1 value2 value3|
+Transcript clear.
+	inbox := BandejaEntrada new.
+	bandejaCarga := BandejaCarga new.
+	bandejaGestion := BandejaGestion new.
+	archivo := Archivo new.
+	tram1 := Tramite new.
+	tram1 descripcion: 'Trámite de prueba'
+		; nombrePersona: 'Juan Presenta'.
+	doc11 := Documentacion
+		newTipo: 'PDF'
+		titulo: 'Planilla'
+		path: 'documentaciones/planillas/Planilla1234.pdf'.
+	docRepe := Documentacion
+		newTipo: 'PDF'
+		titulo: 'Planilla'
+		path: 'documentaciones/planillas/Planilla1234.pdf'.
+	doc12 := Documentacion
+		newTipo: 'JPG'
+		titulo: 'DNI Frente'
+		path: 'documentaciones/transferencia/dni43456789-frente.JPG'.
+	tram1 adjuntarDocumentacion: doc11.
+	tram1 adjuntarDocumentacion: docRepe.
+	tram1 adjuntarDocumentacion: doc12.
+	plani1 := PlanillaPartido new.
+	plani1
+		descripcion: 'Planilla de prueba';
+		nombrePersona: 'Juan Arbitro';
+		nroPartido: 1234.
+	plani2 := PlanillaPartido new.
+	plani2
+		descripcion: 'Planilla de prueba';
+		nombrePersona: 'Juan Arbitro';
+		nroPartido: 1234.
+	doc21 := Documentacion
+		newTipo: 'PDF'
+		titulo: 'Planilla Club Loc'
+		path: 'documentaciones/planillas/Planilla-ptdo1234-club1.pdf'.
+	doc22 := Documentacion
+		newTipo: 'PDF'
+		titulo: 'Planilla Club Vis'
+		path: 'documentaciones/planillas/Planilla-ptdo1234-club2.pdf'.
+	plani2
+		adjuntarDocumentacion: doc21;
+		adjuntarDocumentacion: doc22.
+	transfer1 := Transferencia new.
+	transfer1
+		descripcion: 'Transferencia de prueba';
+		nombrePersona: 'Juan Presenta';
+		club: 'Ranqueles';
+		nombreJugador: 'Philip';
+		dniJugador: 25123456.
+	doc31 := Documentacion
+		newTipo: 'JPG'
+		titulo: 'DNI Frente'
+		path: 'documentaciones/transferencias/DNI-25123456-frente.pdf'.
+	doc32 := Documentacion
+		newTipo: 'JPG'
+		titulo: 'DNI DORSO'
+		path: 'documentaciones/transferencias/DNI-25123456-dorso.pdf'.
+	doc34 := Documentacion
+		newTipo: 'PDF'
+		titulo: 'DNI Frente y DORSO'
+		path: 'documentaciones/transferencias/DNI-25123456-frenteYDorso.pdf'.
+	doc35 := Documentacion
+		newTipo: 'PDF'
+		titulo: 'Planilla transfer'
+		path: 'documentaciones/transferencias/Planilla-transfer-25123456.pdf'.
+	transfer1
+		adjuntarDocumentacion: doc31;
+		adjuntarDocumentacion: doc32;
+		adjuntarDocumentacion: doc34;
+		adjuntarDocumentacion: doc35.
+	transfer2 := Transferencia new.
+	transfer2
+		descripcion: 'Transferencia de prueba';
+		nombrePersona: 'Juan Presenta';
+		club: 'Ranqueles';
+		nombreJugador: 'Nik';
+		dniJugador: 44321654.
+	doc36 := Documentacion
+		newTipo: 'JPG'
+		titulo: 'DNI Frente'
+		path: 'documentaciones/transferencias/DNI-44321654-frente.pdf'.
+	doc37 := Documentacion
+		newTipo: 'JPG'
+		titulo: 'DNI DORSO'
+		path: 'documentaciones/transferencias/DNI-44321654-dorso.pdf'.
+	doc38 := Documentacion
+		newTipo: 'PDF'
+		titulo: 'Planilla transfer'
+		path: 'documentaciones/transferencias/Planilla-transfer-44321654.pdf'.
+	transfer2
+		adjuntarDocumentacion: doc36;
+		adjuntarDocumentacion: doc37;
+		adjuntarDocumentacion: doc38.
+	transferNoValid := Transferencia new.
+	transferNoValid
+		descripcion: 'Transferencia de prueba';
+		nombrePersona: 'Juan Presenta';
+		club: 'Pampas';
+		nombreJugador: 'Pelé';
+		dniJugador: 90000001.
+	doc39 := Documentacion
+		newTipo: 'PDF'
+		titulo: 'Documentacion Transfer'
+		path: 'documentaciones/Transferencias/Doc-90000001.pdf'.
+	transferNoValid adjuntarDocumentacion: doc39.
+	
+	transfer2 setNumero: 25.
+	transfer1 setNumero: 24.
+	transferNoValid setNumero: 26.
+Transcript cr;show: transfer1 asString.
+Transcript cr;show: plani1 asString.
+	
+	"Bandeja de entrada"
+	inbox aceptar: tram1.	"Directamente no cuenta por que nos Planilla o Transferencia"
+	inbox aceptar: plani1.	"Se acepta y se rechaza por no válida"
+	inbox aceptar: transfer1.	"Se acepta y es válido"
+	inbox aceptar: transferNoValid.	"Se acepta y se rechaza por no válido"
+	inbox aceptar: plani2.	"Se acepta y es válido"
+	inbox aceptar: transfer2.	"Se acepta y es válido"
+	
+
+Transcript cr;show: 'Metodos de Bandeja de entrada'.
+Transcript cr;show:'Cantidad de tramites: '; show: inbox contadorTramites.
+
+"Archivar tramites"
+	archivo archivarTramite: inbox archivo.
+
+"Bandeja de Carga"
+	bandejaCarga encolar: inbox bandejaCarga.
+Transcript cr;show: 'Metodos de Bandeja de Carga'.
+Transcript cr;show:'Cantidad de planillas: '; show: bandejaCarga cantidadPlanillas.
+value1 := bandejaCarga getPartidoCargar.
+value1:=bandejaCarga procesarPartido: value1.
+Transcript cr; show: plani2 asString;cr.
+	"Partido gestionado correctamente"
+
+
+"Bandeja Gestion"
+	bandejaGestion encolar: inbox bandejaGestion.
+Transcript cr;show: 'Metodos de Bandeja de Gestion'.
+Transcript cr;show:'Cantidad de transferencias: '; show: bandejaGestion cantidadTransferencias.
+value2 := bandejaGestion getTransferenciaGestionar.
+Transcript cr; show: value2 asString.
+value2 := bandejaGestion aprobarTransferencia: 24 monto: 50000.
+value2 := bandejaGestion aprobarTransferencia: 25 monto: 50000.
+	"Transferencia gestionada correctamente"
+Transcript cr;show:'Transferencias gestionadas:'.
+Transcript cr; show: transfer1 asString. 
+Transcript cr; show: transfer2 asString. 

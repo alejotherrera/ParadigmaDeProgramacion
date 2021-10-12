@@ -1,0 +1,6 @@
+Miembros del grupo:
+87508 Artaz Nicolas
+64818 Garetto Juan
+85969 Herrera Alejo Tomas
+
+Fue adjuntado el archivo PPR-TP2021-Tests.st donde realizamos modificaciones debido a que no construimos las clases constructoras.
