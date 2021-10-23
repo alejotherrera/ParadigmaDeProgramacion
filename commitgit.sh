@@ -21,9 +21,6 @@ echo "Ingrese una tecla para git status"
 read tecla
 git status
 
-echo "Ingrese una tecla para git log"
-read tecla
-git log
 
 echo "Desea continuar?"
 git push origin
