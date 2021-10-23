@@ -1,6 +1,6 @@
 #!/bin/bash
-
-echo "Bienvenido a la gestion de commit"
+echo "Prueba"
+echo "Bienvenido a la gestion de commit--betaS"
 
 echo "Pulse una tecla para git status"
 read tecla
@@ -23,11 +23,9 @@ git status
 
 echo "Ingrese una tecla para git log"
 read tecla
+git log
 
-echo "Ingrese la rama a la que desea actualizar"
-read ramabranch
-git push --set-upstream origin $ramabranch
+echo "Desea continuar?"
+git push origin
 
 echo "Commit finalizado"
-
-#esto es un comentario
