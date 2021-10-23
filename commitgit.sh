@@ -23,6 +23,6 @@ git status
 
 
 echo "Desea continuar?"
-git push origin
+git push --set-upstream origin main
 
 echo "Commit finalizado"
