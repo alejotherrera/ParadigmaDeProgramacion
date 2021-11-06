@@ -33,10 +33,7 @@ regla3sinFA(X):-variacionRansomware(_,X,_,fecha(_,M,A),_),M>0,M<4,A=2020.
 %Regla3 con findall
 regla3(X):-findall(X,(variacionRansomware(_,X,_,fecha(_,M,A),_),M>0,M<4,A=2020),X).
 %Regla4
-%Regla4 sin findall
-regla4sinFA(X):-variacionRansomware(_,X,_,_,LISTA),(member('enero',LISTA);member('diciembre',LISTA)).
-%Regla4 con findall
-regla4(X):-findall(X,(variacionRansomware(_,X,_,_,LISTA),(member('enero',LISTA);member('diciembre',LISTA))),Y).
+regla4(NombreLista):-findall(NombreAux,(variacionRansomware(_,NombreAux,_,_,Fecha),member(Mes,Fecha),Mes=enero),NombreListaAux);findall(Nombre,(member(Nombre,NombreListaAux),variacionRansomware(_,Nombre,_,_,FechaA),member(MesA,FechaA),MesA=diciembre),NombreLista).
 %Regla5
 regla5(X):-troyano(_,T,_,LISTA),T='true',length(LISTA,X).
 
