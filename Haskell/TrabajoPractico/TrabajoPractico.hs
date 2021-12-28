@@ -32,15 +32,21 @@ funcion3 x n | n == 1 = 1 + x / factorial n
 
 
 --Consigna 4
-funcion4 :: (Ord a, Floating a) => a -> a
-funcion4 x | x > 0 && x <= 6.284 = x - x**3/factorial 3 + x**5/factorial 5 - x**7/factorial 7 + x**9/factorial 9 - x**11/factorial 11 + x**13/factorial 13 - x**15/factorial 15 + x**17/ factorial 17 - x**19/factorial 19
-           | x == 0 = 0
-           | otherwise = -2
+posicion :: Float -> Float
+posicion x = if x >= 0.0 && x <= 6.284 then x else (-2)
 
+taylorSerie :: Float -> Integer -> Float
+taylorSerie x n
+          |n > 9 = 0
+          |otherwise =  ( fromIntegral((-1)^n) / fromIntegral(factorial(2*n +1)) ) * x^(2*n+1)  + taylorSerie x (n+1)
+
+funcion4 :: Float -> Float
+funcion4 x = if (posicion x) == (-2) then (-2)
+         else taylorSerie x 0 
 
 --Consigna 5
-funcion5 [] = [(),()]
-funcion5 (h:t)=if length (h:t) > 0 then (x, [x| x <-[funcion4 h]]) ++ funcion5 t else []
+funcion5 [] = []
+funcion5 (h:t)=if length (h:t) > 0 then [x| x <-[(h, funcion4 h)]] ++ funcion5 t else []
 
 
 --Consigna 6

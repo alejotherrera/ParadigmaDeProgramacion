@@ -1,0 +1,63 @@
+Funcion1
+Main> funcion1 8 1
+9
+Main> funcion1 10 0
+0
+Main> funcion1 10 (-1)
+9
+
+Funcion2
+Main> funcion2 [6,7,2,8,4,9] 1
+[7,8,3,9,5,10]
+Main> funcion2 [3,7,9,8,5,6] 0
+[0,0,0,0,0,0]
+Main> funcion2 [5,7,6,8,8,0] (-2)
+[4,6,5,7,7,-1]
+
+Funcion3
+Main> funcion3 5 9
+143.689456569665
+Main> funcion3 5 3
+39.3333333333333
+Main> funcion3 10 36
+22026.4657938238
+Main> funcion3 0 0
+1.0
+Main> funcion3 0 12
+1.0
+Main> funcion3 6 5
+179.8
+
+Funcion4
+Main> funcion4 2.2
+0.8084964
+Main> funcion4 0
+0.0
+Main> funcion4 (-3.14)
+-2.0
+Main> funcion4 1.5
+0.997494986604055
+Main> funcion4 (-6.99)
+-2.0
+
+Funcion5
+Main> funcion5 [0,0,5,7]
+[(0.0,0.0),(0.0,0.0),(5.0,-0.9589319),(7.0,-2.0)]
+Main> funcion5 [3,6,9,1]
+[(3.0,0.14112),(6.0,-0.2798157),(9.0,-2.0),(1.0,0.841471)]
+Main> funcion5 [1.2,6,9.5,0,3.14]
+[(1.2,0.9320391),(6.0,-0.2798157),(9.5,-2.0),(0.0,0.0),(3.14,0.001592398)]
+Main> funcion5 [1.2,6.1,(-1)]
+[0.932039085967226,-0.182728007681372,-2.0]
+
+Funcion6
+Main> funcion6 3 2
+(3,4)
+Main> funcion6 5 6
+(5,6)
+Main> funcion6 10 (-5)
+(10,9)
+Main> funcion6 7 10
+(7,8)
+Main> funcion6 9 10
+(9,10)
